@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <link rel="shortcut icon" href="/assets/img/icon-min.png">
+    <link rel="icon" type="image/vnd.microsoft.icon" href="/assets/img/icon-min.png">
+    <title>ct</title>
+    <link href="/vendor/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <script src="/vendor/instacam.umd.js" crossorigin="anonymous"></script>
+    <style>
+        #ct-box {
+            text-align: center;
+        }
+
+        #ct {
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div id="ct-box" class="card mb-1">
+        <div class="card-body">
+            <canvas id="ct"/>
+        </div>
+    </div>
+    <div class="card mb-1">
+        <div class="card-body">
+            <div>
+                <label class="field-property form-label" for="css-opacity">
+                    <span class="field-name">opacity</span>
+                    <span class="field-value">1</span>
+                </label>
+                <input type="range" id="css-opacity" name="opacity" min="0" max="1" step="0.01" value="1" class="field-input-range form-range" data-default="1">
+                <input type="button" value="reset" class="field-input-reset" data-for="css-opacity">
+            </div>
+            <div>
+                <label class="field-property form-label" for="css-brightness">
+                    <span class="field-name">brightness</span>
+                    <span class="field-value">1</span>
+                </label>
+                <input type="range" id="css-brightness" name="brightness" min="0" max="10" step="0.1" value="1" class="field-input-range form-range" data-default="1">
+                <input type="button" value="reset" class="field-input-reset" data-for="css-brightness">
+            </div>
+            <div>
+                <label class="field-property form-label" for="css-contrast">
+                    <span class="field-name">contrast</span>
+                    <span class="field-value">1</span>
+                </label>
+                <input type="range" id="css-contrast" name="contrast" min="0" max="10" step="0.1" value="1" class="field-input-range form-range" data-default="1">
+                <input type="button" value="reset" class="field-input-reset" data-for="css-contrast">
+            </div>
+            <div>
+                <label class="field-property form-label" for="css-saturation">
+                    <span class="field-name">saturation</span>
+                    <span class="field-value">1</span>
+                </label>
+                <input type="range" id="css-saturation" name="saturation" min="0" max="10" step="0.1" value="1" class="field-input-range form-range" data-default="1">
+                <input type="button" value="reset" class="field-input-reset" data-for="css-saturation">
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <a href="https://instacam.js.org/" target="_blank">https://instacam.js.org/</a>
+        </div>
+    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const camera = new Instacam(
+            document.querySelector('#ct')
+        );
+		console.log(camera);
+
+        const cssOpacity = document.getElementById('css-opacity');
+        cssOpacity.addEventListener('change', (event) => {
+            const element = event.target;
+            const fieldValue = document.querySelector('[for="css-opacity"] .field-value');
+            fieldValue.innerText = element.value;
+            camera.opacity = Number(element.value);
+        });
+
+        const cssBrightness = document.getElementById('css-brightness');
+        cssBrightness.addEventListener('change', (event) => {
+            const element = event.target;
+            const fieldValue = document.querySelector('[for="css-brightness"] .field-value');
+            fieldValue.innerText = element.value;
+            camera.brightness = Number(element.value);
+        });
+
+        const cssContrast = document.getElementById('css-contrast');
+        cssContrast.addEventListener('change', (event) => {
+            const element = event.target;
+            const fieldValue = document.querySelector('[for="css-contrast"] .field-value');
+            fieldValue.innerText = element.value;
+            camera.contrast = Number(element.value);
+        });
+
+        const cssSaturation = document.getElementById('css-saturation');
+        cssSaturation.addEventListener('change', (event) => {
+            const element = event.target;
+            const fieldValue = document.querySelector('[for="css-saturation"] .field-value');
+            fieldValue.innerText = element.value;
+            camera.saturation = Number(element.value);
+        });
+    });
+</script>
+</body>
+</html>
